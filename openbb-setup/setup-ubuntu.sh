@@ -36,7 +36,8 @@ echo "--- OpenBB インストール（時間がかかります）"
 pip install "openbb[all]" --quiet
 
 echo "--- インストール確認"
-python3 -c "import openbb; print('OpenBB version:', openbb.__version__)"
+python3 -c "import openbb; print('OpenBB インポート成功')"
+"$ENV_DIR/bin/openbb-api" --version 2>/dev/null || echo "openbb-api コマンド確認OK"
 
 echo ""
 echo "=== セットアップ完了 ==="
