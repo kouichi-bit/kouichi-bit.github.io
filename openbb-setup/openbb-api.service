@@ -1,0 +1,27 @@
+# systemd サービスファイル
+# Ubuntu側でバックグラウンド常時起動したい場合に使用
+#
+# インストール手順:
+#   sudo cp openbb-api.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable openbb-api
+#   sudo systemctl start openbb-api
+#   sudo systemctl status openbb-api
+#
+# ログ確認:
+#   journalctl -u openbb-api -f
+
+[Unit]
+Description=OpenBB API Server
+After=network.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/home/%i/codex_work
+ExecStart=/home/%i/codex_work/openbb_env/bin/openbb-api --host 0.0.0.0 --port 6900
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
